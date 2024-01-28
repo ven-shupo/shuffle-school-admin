@@ -11,7 +11,7 @@ function Preview () {
  
   const [isAdmin, setIsAdmin] = useState();
   const username = tg.initDataUnsafe.user.username;
-  if (username == "vanshupo" || username == "") {
+  if (username == "venshupo" || username == "") {
     setIsAdmin(true)
   }
   return (
@@ -21,27 +21,16 @@ function Preview () {
         className={styles.preview}
         style={{backgroundColor: 'var(--tg-theme-secondary-bg-color)'}}
         >
-        <div
+          <div
             className={styles.card}
             style={{ 
-                backgroundImage: 'url(https://ven-shupo.github.io/shuffle-school/card.png)',
+                backgroundImage: 'url(https://ven-shupo.github.io/shuffle-school-admin/card.png)',
                 backgroundColor: 'var(--tg-theme-secondary-bg-color)'
             }}
-        >
+          >
+          </div>
         </div>
-        {lessons && 
-            <div
-                className={styles.infoText}
-                style={{
-                    color: 'var(--tg-theme-text-color)', 
-                    backgroundColor: 'var(--tg-theme-secondary-bg-color)'
-                }}
-            > 
-                Осталось {lessons} занятий
-            </div>
-        }
-        </div>
-    } 
+    }
     </div>
   )
 }
