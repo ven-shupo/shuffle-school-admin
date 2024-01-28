@@ -5,21 +5,20 @@ import styles from '../styles/Home.module.css';
 
 
 export default function Home() {
-  return <Preview/>;
-  // return (
-  //   <div
-  //     className={styles.app}
-  //     style={{backgroundColor: 'var(--tg-theme-secondary-bg-color)'}}
-  //   >
-  //     <Script
-  //       src="https://ven-shupo.github.io/shuffle-school/tgcl.js"
-  //       strategy="beforeInteractive"
-  //     />
-  //       <Head>
-  //         <title>XXX SHUFFLE</title>
-  //         <link rel="icon" href="https://ven-shupo.github.io/shuffle-school/favicon.ico" />
-  //       </Head>
-  //       <Preview/>
-  //   </div>
-  // );
+  return (
+    <div
+      className={styles.app}
+      style={{backgroundColor: 'var(--tg-theme-secondary-bg-color)'}}
+    >
+      <Script
+        src="https://ven-shupo.github.io/shuffle-school/tgcl.js"
+        strategy="beforeInteractive"
+      />
+        <Head>
+          <title>XXX SHUFFLE</title>
+          <link rel="icon" href="https://ven-shupo.github.io/shuffle-school/favicon.ico" />
+        </Head>
+        <Preview/>
+    </div>
+  );
 }
