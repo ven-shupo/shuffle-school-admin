@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "homepage": "http://ven-shupo.github.io/shuffle-school",
+  "scripts": {
+    "build": "next build",
+    "export": "next export",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.7.3",
+    "cors": "^2.8.5",
+    "jquery": "^3.7.1",
+    "next": "latest",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-tinder-card": "^1.6.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.3",
+    "@types/react": "18.2.25",
+    "typescript": "5.2.2"
+  }
+}
