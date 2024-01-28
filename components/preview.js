@@ -11,21 +11,22 @@ function Preview () {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const rows = [];
+    for (let i = 1; i <= 5; i++) {
+      rows.push(
+        <input {...register('tg_' + i, {required: true})}/>
+      );
+      rows.push(
+        <input {...register('left_' + i, { pattern: /\d+/, required: true})} />
+      );
+      rows.push(<br/>)
+    }
     return (
         <form onSubmit={handleSubmit((data) => console.log(data))}>
-          <label>telegram username</label>
-          <label>classes left</label>
+          <label>Telegram username</label>
+          <label>Classes left</label>
           <br/>
-          <input {...register('tg_1', {required: true})} />
-          <input {...register('left_1', { pattern: /\d+/, required: true})} />
-          <br/>
-          <input {...register('tg_2', {required: true})} />
-          <input {...register('left_2', { pattern: /\d+/, required: true})} />
-          <br/>
-          <input {...register('tg_3', {required: true})} />
-          <input {...register('left_3', { pattern: /\d+/, required: true})} />
-          <br/>
+          {rows}
           <input type="submit" />
         </form>
       );
