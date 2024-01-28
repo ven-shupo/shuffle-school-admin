@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {useTelegramWeb} from "../lib/telegramWeb";
 import styles from '../styles/Home.module.css';
 
@@ -11,7 +11,7 @@ function Preview () {
  
   const [isAdmin, setIsAdmin] = useState();
   const username = tg.initDataUnsafe.user.username;
-  if (username == "venshupo" || username == "") {
+  if (username == "venshupo" || username == "danetuzh") {
     setIsAdmin(true)
   }
   return (
