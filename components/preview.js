@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import DataGrid from 'react-data-grid';
 import { useForm } from 'react-hook-form';
-// import {useTelegramWeb} from "../lib/telegramWeb";
+import {useTelegramWeb} from "../lib/telegramWeb";
 import styles from '../styles/Home.module.css';
 
 
