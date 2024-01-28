@@ -23,8 +23,8 @@ function Preview () {
           <input {...register('tg_2', {required: true})} />
           <input {...register('left_2', { pattern: /\d+/, required: true})} />
           <br/>
-          <input {...register('tg_2', {required: true})} />
-          <input {...register('left_2', { pattern: /\d+/, required: true})} />
+          <input {...register('tg_3', {required: true})} />
+          <input {...register('left_3', { pattern: /\d+/, required: true})} />
           <br/>
           <input type="submit" />
         </form>
