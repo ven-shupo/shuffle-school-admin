@@ -4,15 +4,6 @@ import { useForm } from 'react-hook-form';
 // import {useTelegramWeb} from "../lib/telegramWeb";
 import styles from '../styles/Home.module.css';
 
-const columns = [
-    { key: 'id', name: 'ID' },
-    { key: 'title', name: 'Title' }
-  ];
-
-const rows = [
-{ id: 0, title: 'Example' },
-{ id: 1, title: 'Demo' }
-];
 
 function Preview () {
     const {
@@ -23,9 +14,12 @@ function Preview () {
 
     return (
         <form onSubmit={handleSubmit((data) => console.log(data))}>
+          <label>First Name</label>
           <input {...register('firstName')} />
+          <label>Lasr Name</label>
           <input {...register('lastName', { required: true })} />
           {errors.lastName && <p>Last name is required.</p>}
+          <label>Age</label>
           <input {...register('age', { pattern: /\d+/ })} />
           {errors.age && <p>Please enter number for age.</p>}
           <input type="submit" />
