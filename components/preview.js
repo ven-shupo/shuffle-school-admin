@@ -26,10 +26,10 @@ function Preview () {
         const newRows = [];
         for (const dancer of data.records) {
           newRows.push(
-            <input defaultValue={i} {...register('tg_' + dancer.id, {required: true})}/>
+            <input defaultValue={dancer.tg} {...register('tg_' + dancer.id, {required: true})}/>
           );
           newRows.push(
-            <input defaultValue={i} {...register('left_' + dancer.id, { pattern: /\d+/, required: true})} />
+            <input defaultValue={dancer.classes_left} {...register('left_' + dancer.id, { pattern: /\d+/, required: true})} />
           );
           newRows.push(<br/>)
         }
