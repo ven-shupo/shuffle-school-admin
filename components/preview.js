@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import {useTelegramWeb} from "../lib/telegramWeb";
 import styles from '../styles/Home.module.css';
 
-function makeNewRows (data) {
+function makeNewRows (data, register) {
   const newRows = [];
   for (const dancer of data.records) {
     newRows.push(
@@ -31,7 +31,12 @@ function Preview () {
     tg.MainButton.setParams({text: 'Закрыть', is_visible: true}).onClick(() => {
       tg.close()
     });
-    
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+  } = useForm();
+
     // const tgUserName = tg.initDataUnsafe.user.username;
     const requestOptions = {
       method: 'GET',
@@ -44,17 +49,13 @@ function Preview () {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        setRows(makeNewRows(data));
+        setRows(makeNewRows(data, register));
       })
       .catch((err) => {
           console.log(err.message);
     });
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+
 
     return (
         <form onSubmit={handleSubmit((data) => console.log(data))}>
