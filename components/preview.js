@@ -23,7 +23,7 @@ function Preview () {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        newRows = [];
+        const newRows = [];
         for (const dancer of data.records) {
           newRows.push(
             <input defaultValue={i} {...register('tg_' + dancer.id, {required: true})}/>
