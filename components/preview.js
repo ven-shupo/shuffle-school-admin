@@ -4,6 +4,27 @@ import { useForm } from 'react-hook-form';
 import {useTelegramWeb} from "../lib/telegramWeb";
 import styles from '../styles/Home.module.css';
 
+function makeNewRows (data) {
+  const newRows = [];
+  for (const dancer of data.records) {
+    newRows.push(
+      <input defaultValue={dancer.fields.tg} {...register('tg_' + dancer.id, {required: true})}/>
+    );
+    newRows.push(
+      <input defaultValue={dancer.fields.classes_left} {...register('left_' + dancer.id, { pattern: /\d+/, required: true})} />
+    );
+    newRows.push(<br/>)
+  }
+  newRows.push(
+    <input {...register('tg_new')}/>
+  );
+  newRows.push(
+    <input {...register('left_new', { pattern: /\d+/})} />
+  );
+  newRows.push(<br/>);
+  return newRows
+}
+
 
 function Preview () {
     const tg = useTelegramWeb();
@@ -23,24 +44,7 @@ function Preview () {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        const newRows = [];
-        for (const dancer of data.records) {
-          newRows.push(
-            <input defaultValue={dancer.fields.tg} {...register('tg_' + dancer.id, {required: true})}/>
-          );
-          newRows.push(
-            <input defaultValue={dancer.fields.classes_left} {...register('left_' + dancer.id, { pattern: /\d+/, required: true})} />
-          );
-          newRows.push(<br/>)
-        }
-        newRows.push(
-          <input {...register('tg_new')}/>
-        );
-        newRows.push(
-          <input {...register('left_new', { pattern: /\d+/})} />
-        );
-        newRows.push(<br/>);
-        setRows(newRows);
+        setRows(makeNewRows(data));
       })
       .catch((err) => {
           console.log(err.message);
