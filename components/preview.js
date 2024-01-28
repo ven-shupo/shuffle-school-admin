@@ -9,7 +9,7 @@ function Preview () {
     tg.close()
   });
  
-  const [isAdmin, setIsAdmin] = useState();
+  const [isAdmin, setIsAdmin] = useState(false);
   const username = tg.initDataUnsafe.user.username;
   if (username == "venshupo" || username == "danetuzh") {
     setIsAdmin(true)
