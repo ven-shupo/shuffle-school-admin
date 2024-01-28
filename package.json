@@ -14,7 +14,7 @@
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-tinder-card": "^1.6.3"
+    "react-icons": "^4.8.0"
   },
   "engines": {
     "node": ">=18"
