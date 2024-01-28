@@ -14,17 +14,16 @@ function Preview () {
     const rows = [];
     for (let i = 1; i <= 5; i++) {
       rows.push(
-        <input {...register('tg_' + i, {required: true})}/>
+        <input defaultValue={i} {...register('tg_' + i, {required: true})}/>
       );
       rows.push(
-        <input {...register('left_' + i, { pattern: /\d+/, required: true})} />
+        <input defaultValue={i} {...register('left_' + i, { pattern: /\d+/, required: true})} />
       );
       rows.push(<br/>)
     }
     return (
         <form onSubmit={handleSubmit((data) => console.log(data))}>
-          <label>Telegram username</label>
-          <label>Classes left</label>
+          <label>Telegram username    | Classes left</label>
           <br/>
           {rows}
           <input type="submit" />
