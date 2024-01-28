@@ -14,16 +14,18 @@ function Preview () {
 
     return (
         <form onSubmit={handleSubmit((data) => console.log(data))}>
-          <label>First Name</label>
-          <input {...register('firstName')} />
+          <label>telegram username</label>
+          <label>classes left</label>
           <br/>
-          <label>Lasr Name</label>
-          <input {...register('lastName', { required: true })} />
-          {errors.lastName && <p>Last name is required.</p>}
+          <input {...register('tg_1', {required: true})} />
+          <input {...register('left_1', { pattern: /\d+/, required: true})} />
           <br/>
-          <label>Age</label>
-          <input {...register('age', { pattern: /\d+/ })} />
-          {errors.age && <p>Please enter number for age.</p>}
+          <input {...register('tg_2', {required: true})} />
+          <input {...register('left_2', { pattern: /\d+/, required: true})} />
+          <br/>
+          <input {...register('tg_2', {required: true})} />
+          <input {...register('left_2', { pattern: /\d+/, required: true})} />
+          <br/>
           <input type="submit" />
         </form>
       );
