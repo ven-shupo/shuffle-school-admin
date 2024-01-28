@@ -21,6 +21,15 @@ function Preview () {
       );
       rows.push(<br/>)
     }
+
+    rows.push(
+      <input {...register('tg_new')}/>
+    );
+    rows.push(
+      <input {...register('left_new', { pattern: /\d+/})} />
+    );
+    rows.push(<br/>)
+
     return (
         <form onSubmit={handleSubmit((data) => console.log(data))}>
           <label>Telegram username    | Classes left</label>
