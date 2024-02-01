@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {useTelegramWeb} from "../lib/telegramWeb";
-// import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 
 function makeFormRows (data, register) {
   if (!data) { return null };
@@ -30,29 +30,42 @@ function makeRecordsToUpdate (data) {
   if (!data) {return null};
   let records = [];
   console.log(data);
-  for (const dancer of data) {
-    let id = "";
-    let isNew = false;
-    for (let key in dancer) {
-      if (key == 'tg_new') {
-        isNew = true;
-      }
-      if (key.startsWith("tg_")) {
-        id = key.match(/tg_(.*)/)[1];
-      }
-    }
-    if (isNew) {
-      continue;
-    }
-    records.push({"id": id, "fields": {"classes_left": dancer['left_' + id]}});
+  for (let key in data) {
+    if (!key.startsWith("tg_")) {continue};
+    if (key == 'tg_new') {continue};
+
+    let id = key.match(/tg_(.*)/)[1];
+    records.push({"id": id, "fields": {"classes_left": parseInt(data['left_' + id], 10)}});
   }
   return records
 }
 
-function postUpdate(data) {
-  let toUpdate = {"records": makeRecordsToUpdate(data)};
-  console.log(toUpdate);
+function update(records) {
+  fetch('https://api.airtable.com/v0/appXfAFgufLXTHPVr/dancer', {
+    method: 'PATCH',
+    headers: {
+      'Authorization': 'Bearer pat0dvTizQRN2iUqy.ddbd350795b4154882661016c9a5899cc5c53c9d283db1bbd3bda9c2bd68a031',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"records": records})
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
+
+function postUpdate(data) {
+  let toUpdate = makeRecordsToUpdate(data)
+  for (let i = 0; i < toUpdate.length; i += 10) {
+    const chunk = toUpdate.slice(i, i + 10);
+    update(chunk);
+  };
+}
+
 
 function Preview () {
     const tg = useTelegramWeb();
