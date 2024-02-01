@@ -29,6 +29,7 @@ function makeFormRows (data, register) {
 function makeRecordsToUpdate (data) {
   if (!data) {return null};
   let records = [];
+  console.log(data);
   for (const dancer of data) {
     let id = "";
     let isNew = false;
