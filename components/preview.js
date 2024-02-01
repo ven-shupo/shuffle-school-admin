@@ -26,6 +26,33 @@ function makeFormRows (data, register) {
   return rows
 };
 
+function makeRecordsToUpdate (data) {
+  if (!data) {return null};
+  let records = [];
+  for (const dancer of data) {
+    let id = "";
+    let isNew = false;
+    for (let key in dancer) {
+      if (key == 'tg_new') {
+        isNew = true;
+      }
+      if (key.startsWith("tg_")) {
+        id = key.match(/tg_(.*)/)[1];
+      }
+    }
+    if (isNew) {
+      continue;
+    }
+    records.push({"id": id, "fields": {"classes_left": dancer['left_' + id]}});
+  }
+  return records
+}
+
+function postUpdate(data) {
+  let toUpdate = {"records": makeRecordsToUpdate(data)};
+  console.log(toUpdate);
+}
+
 function Preview () {
     const tg = useTelegramWeb();
     tg.MainButton.setParams({text: 'Закрыть', is_visible: true}).onClick(() => {
@@ -54,7 +81,7 @@ function Preview () {
       <div>
         {r ? (
           <div>
-            <form onSubmit={handleSubmit((data) => console.log(data))}>
+            <form onSubmit={handleSubmit(postUpdate)}>
               {r}
               <input type="submit" />
             </form>
