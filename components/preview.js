@@ -31,7 +31,7 @@ function Preview () {
     tg.MainButton.setParams({text: 'Закрыть', is_visible: true}).onClick(() => {
       tg.close()
     });
-    
+
     const {
       register,
       handleSubmit,
@@ -40,7 +40,7 @@ function Preview () {
     
     const [dancers, setDancers] = useState(null);
     useEffect(() => {
-      fetch("https://api.airtable.com/v0/appXfAFgufLXTHPVr/dancer?maxRecords=30", {
+      fetch("https://api.airtable.com/v0/appXfAFgufLXTHPVr/dancer?maxRecords=30&sort%5B0%5D%5Bfield%5D=updated&sort%5B0%5D%5Bdirection%5D=desc", {
         method: 'GET',
         headers: { "Authorization": "Bearer pattpUkpI0kiExoi9.e98cfe85447f4a5d49fbd63d0f59baa57121f7578e207036c666c8cb0329eeb9"},
       })
