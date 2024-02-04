@@ -126,7 +126,11 @@ function Preview () {
           >
             {successUpdate && 'Успешно обновлено'}
             {successSave && 'Успешно сохранено'}
-            <form onSubmit={handleSubmit((data) => {sendChanges(data, setSuccessUpdate, setSuccessSave)})}>
+            <form onSubmit={handleSubmit((data) => {
+              setSuccessUpdate(false);
+              setSuccessSave(false);
+              sendChanges(data, setSuccessUpdate, setSuccessSave);
+            })}>
               {rows}
               <input type="submit" />
             </form>
