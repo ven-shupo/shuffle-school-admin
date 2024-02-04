@@ -5,7 +5,6 @@ import styles from '../styles/Home.module.css';
 
 
 export default function Home() {
-  // return <Preview/>
   return (
     <div
       className={styles.app}
@@ -17,6 +16,7 @@ export default function Home() {
       />
         <Head>
           <title>XXX SHUFFLE</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
           <link rel="icon" href="https://ven-shupo.github.io/shuffle-school/favicon.ico" />
         </Head>
         <Preview/>
