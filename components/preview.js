@@ -47,13 +47,21 @@ function makeRecordsToCreate (data) {
   return [{"fields": {"tg": data['tg_new'], "classes_left": data['left_new']}}];
 }
 
-function updateOrCreate(records) {
+function update(records) {
+  return updateOrCreate('PATCH', records);
+}
+
+function create(records) {
+  return updateOrCreate('POST', records);
+}
+
+function updateOrCreate(method, records) {
   if (!records) {
     return;
   }
 
   fetch('https://api.airtable.com/v0/appXfAFgufLXTHPVr/dancer', {
-    method: 'PATCH',
+    method: method,
     headers: {
       'Authorization': 'Bearer pat0dvTizQRN2iUqy.ddbd350795b4154882661016c9a5899cc5c53c9d283db1bbd3bda9c2bd68a031',
       'Content-Type': 'application/json'
@@ -74,10 +82,10 @@ function sendChanges(data) {
   let toUpdate = makeRecordsToUpdate(data);
   for (let i = 0; i < toUpdate.length; i += 10) {
     const chunk = toUpdate.slice(i, i + 10);
-    updateOrCreate(chunk);
+    update(chunk);
   };
   let toSave = makeRecordsToCreate(data);
-  updateOrCreate(toSave);
+  create(toSave);
 }
 
 
