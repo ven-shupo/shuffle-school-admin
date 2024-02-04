@@ -44,7 +44,7 @@ function makeRecordsToCreate (data) {
     return null;
   } 
   
-  return [{"fields": {"tg": data['tg_new'], "classes_left": data['left_new']}}];
+  return [{"fields": {"tg": data['tg_new'], "classes_left": parseInt(data['left_new'], 10)}}];
 }
 
 function update(records) {
