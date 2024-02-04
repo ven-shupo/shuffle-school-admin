@@ -112,10 +112,11 @@ function Preview () {
       .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    let isAdmin = tg.initDataUnsafe.user.username == 'venshupo' || tg.initDataUnsafe.user.username == 'danetuzh'
     const rows = makeFormRows(dancers, register);
     return (
       <div>
-        {rows ? (
+        {isAdmin && rows ? (
           <div>
             <form onSubmit={handleSubmit(sendChanges)}>
               {rows}
