@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {useTelegramWeb} from "../lib/telegramWeb";
-import styles from '../styles/Home.module.css';
 
 function makeFormRows (data, register) {
   if (!data) { return null };
