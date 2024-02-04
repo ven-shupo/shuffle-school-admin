@@ -29,7 +29,6 @@ function makeFormRows (data, register) {
 function makeRecordsToUpdate (data) {
   if (!data) {return null};
   let records = [];
-  console.log(data);
   for (let key in data) {
     if (!key.startsWith("tg_")) {continue};
     if (key == 'tg_new') {continue};
@@ -40,7 +39,20 @@ function makeRecordsToUpdate (data) {
   return records
 }
 
-function update(records) {
+function makeRecordsToCreate (data) {
+  if (!data) {return null};
+  if (!data['tg_new'] || !data['left_new']) {
+    return null;
+  } 
+  
+  return [{"fields": {"tg": data['tg_new'], "classes_left": data['left_new']}}];
+}
+
+function updateOrCreate(records) {
+  if (!records) {
+    return;
+  }
+
   fetch('https://api.airtable.com/v0/appXfAFgufLXTHPVr/dancer', {
     method: 'PATCH',
     headers: {
@@ -58,12 +70,15 @@ function update(records) {
   });
 }
 
-function postUpdate(data) {
-  let toUpdate = makeRecordsToUpdate(data)
+
+function sendChanges(data) {
+  let toUpdate = makeRecordsToUpdate(data);
   for (let i = 0; i < toUpdate.length; i += 10) {
     const chunk = toUpdate.slice(i, i + 10);
-    update(chunk);
+    updateOrCreate(chunk);
   };
+  let toSave = makeRecordsToCreate(data);
+  updateOrCreate(toSave);
 }
 
 
@@ -90,13 +105,13 @@ function Preview () {
       .catch(error => console.error('Error fetching data:', error));
     }, []);
 
-    const r = makeFormRows(dancers, register);
+    const rows = makeFormRows(dancers, register);
     return (
       <div>
-        {r ? (
+        {rows ? (
           <div>
-            <form onSubmit={handleSubmit(postUpdate)}>
-              {r}
+            <form onSubmit={handleSubmit(sendChanges)}>
+              {rows}
               <input type="submit" />
             </form>
           </div>
