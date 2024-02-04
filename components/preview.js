@@ -119,7 +119,11 @@ function Preview () {
     return (
       <div>
         {(isAdmin && rows) ? (
-          <div>
+          <div style={{
+              color: 'var(--tg-theme-text-color)', 
+              backgroundColor: 'var(--tg-theme-secondary-bg-color)'
+            }}
+          >
             {successUpdate && 'Успешно обновлено'}
             {successSave && 'Успешно сохранено'}
             <form onSubmit={handleSubmit((data) => {sendChanges(data, setSuccessUpdate, setSuccessSave)})}>
