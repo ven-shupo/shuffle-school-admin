@@ -47,11 +47,11 @@ function makeRecordsToCreate (data) {
   return [{"fields": {"tg": data['tg_new'], "classes_left": parseInt(data['left_new'], 10)}}];
 }
 
-function update(records) {
-  return updateOrCreate('PATCH', records);
+function update(records, setIfSuccess) {
+  return updateOrCreate('PATCH', records, setIfSuccess);
 }
 
-function create(records) {
+function create(records, setIfSuccess) {
   return updateOrCreate('POST', records, setIfSuccess);
 }
 
