@@ -117,7 +117,7 @@ function Preview () {
     const [successUpdate, setSuccessUpdate] = useState(false);
     const [successSave, setSuccessSave] = useState(false);
     return (
-      <div>
+      <div style={{width :'100px'}}>
         {(isAdmin && rows) ? (
           <div style={{
               color: 'var(--tg-theme-text-color)', 
