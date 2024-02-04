@@ -52,10 +52,10 @@ function update(records) {
 }
 
 function create(records) {
-  return updateOrCreate('POST', records);
+  return updateOrCreate('POST', records, setIfSuccess);
 }
 
-function updateOrCreate(method, records) {
+function updateOrCreate(method, records, setIfSuccess) {
   if (!records) {
     return;
   }
@@ -71,23 +71,22 @@ function updateOrCreate(method, records) {
   .then(response => response.json())
   .then(data => {
     console.log('Success:', data);
+    setIfSuccess(true);
   })
   .catch((error) => {
     console.error('Error:', error);
   });
 }
 
-
-function sendChanges(data) {
+function sendChanges(data, setIfSuccessUpdate, setIfSuccessSave) {
   let toUpdate = makeRecordsToUpdate(data);
   for (let i = 0; i < toUpdate.length; i += 10) {
     const chunk = toUpdate.slice(i, i + 10);
-    update(chunk);
+    update(chunk, setIfSuccessUpdate);
   };
   let toSave = makeRecordsToCreate(data);
-  create(toSave);
+  create(toSave, setIfSuccessSave);
 }
-
 
 function Preview () {
     const tg = useTelegramWeb();
@@ -111,14 +110,19 @@ function Preview () {
       .then(data => setDancers(data))
       .catch(error => console.error('Error fetching data:', error));
     }, []);
-
+    
     let isAdmin = tg.initDataUnsafe.user.username == 'venshupo' || tg.initDataUnsafe.user.username == 'danetuzh'
     const rows = makeFormRows(dancers, register);
+
+    const [successUpdate, setSuccessUpdate] = useState(false);
+    const [successSave, setSuccessSave] = useState(false);
     return (
       <div>
-        {isAdmin && rows ? (
+        {(isAdmin && rows) ? (
           <div>
-            <form onSubmit={handleSubmit(sendChanges)}>
+            {successUpdate && 'Успешно обновлено'}
+            {successSave && 'Успешно сохранено'}
+            <form onSubmit={handleSubmit((data) => {sendChanges(data, setSuccessUpdate, setSuccessSave)})}>
               {rows}
               <input type="submit" />
             </form>
